@@ -1,6 +1,6 @@
 # Tutorials: End-to-End Publication Figures
 
-Implement the API described in [api.md](api.md) in your own code (constants, style, plot helpers, finalize). This repository does not currently ship a tracked shared Python module that defines `apply_publication_style`, `make_grouped_bar`, or the other helpers directly; their signatures and behavior are specified in [api.md](api.md) and should be implemented or adapted per project. For real-world scripts that follow this style, see [demos.md](demos.md) (links to the [figures4papers](https://github.com/ChenLiu-1996/figures4papers) `figure_*` folders).
+The API described in [api.md](api.md) is implemented by the `figures4papers` package in this repository (`import figures4papers as fp`); every name below is available as `fp.<name>`. See `examples/` for ports of the original scripts. For real-world scripts that follow this style, see [demos.md](demos.md) (links to the [figures4papers](https://github.com/ChenLiu-1996/figures4papers) `figure_*` folders).
 
 If venue, approximate dimensions, or export formats are missing and they would change layout or DPI, ask before locking choices. For unattended scripts, set a non-interactive matplotlib backend (for example `matplotlib.use("Agg")`) before importing `pyplot`. Finish with `finalize_figure` as in [api.md](api.md).
 
@@ -19,12 +19,12 @@ If venue, approximate dimensions, or export formats are missing and they would c
 - [ ] Set y-limits to a range that fits the data (tighten when values sit in a narrow band).
 - [ ] Call `finalize_figure(fig, "output/comparison", formats=["png", "pdf"], dpi=300)`.
 
-**Example flow** (illustrative counts; implement helpers per [api.md](api.md)):
+**Example flow** (illustrative counts; helpers from `figures4papers`):
 
 ```python
 import matplotlib.pyplot as plt
 
-# Assume you have implemented: apply_publication_style, FigureStyle, make_grouped_bar, finalize_figure, PALETTE (see api.md)
+from figures4papers import apply_publication_style, FigureStyle, make_grouped_bar, finalize_figure, PALETTE
 apply_publication_style(FigureStyle(font_size=24, axes_linewidth=3))
 fig, ax = plt.subplots(figsize=(16, 5))
 
@@ -58,7 +58,7 @@ finalize_figure(fig, "output/method_comparison", formats=["png", "pdf"], dpi=300
 - [ ] Set y-limits and titles on data panels.
 - [ ] Call `finalize_figure`.
 
-**Example flow** (implement helpers per [api.md](api.md)):
+**Example flow** (`from figures4papers import *`):
 
 ```python
 import numpy as np
@@ -96,7 +96,7 @@ finalize_figure(fig, "output/trends", formats=["png", "pdf"], dpi=300)
 - [ ] Call `make_heatmap(ax, matrix, x_labels=..., y_labels=..., cmap="magma", cbar_label="...")`.
 - [ ] Call `finalize_figure`.
 
-**Example flow** (implement helpers per [api.md](api.md)):
+**Example flow** (`from figures4papers import *`):
 
 ```python
 import numpy as np

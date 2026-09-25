@@ -58,6 +58,44 @@ These figures were made partially in Python. I included them to acknowledge the 
 
 <br>
 
+
+## Python library (`figures4papers`)
+
+The shared style and the recurring patterns of the `figure_*` scripts are packaged under `src/figures4papers/`.
+
+```bash
+uv add /path/to/figures4papers        # or: pip install -e /path/to/figures4papers
+```
+
+```python
+import numpy as np
+import figures4papers as fp
+
+fp.apply_publication_style("bar")      # presets: "bar" (24pt / spine 3), "compact" (16 / 2), "concept"
+methods = ["Baseline A", "Baseline B", "Ours"]
+results = {                             # (n_methods, n_runs) -> mean ± std automatically
+    "AUROC": np.random.rand(3, 5),
+    "AUPRC": np.random.rand(3, 5),
+}
+fig, axes = fp.metric_panels(results, methods, fp.ours_vs_baselines(2, ours_first=False), annotate=True)
+fp.finalize_figure(fig, "figures/comparison")   # -> comparison.png + comparison.pdf
+```
+
+| Module | Main functions |
+|---|---|
+| `style` | `apply_publication_style`, `publication_style` (context manager), `FigureStyle`, `PRESETS` |
+| `palette` | `PALETTE`, `DEFAULT_COLORS`, `is_dark`, `text_color_for`, `alpha_ramp`, `gradient`, `ours_vs_baselines` |
+| `bars` | `metric_panels`, `make_bars`, `annotate_bars`, `add_delta_arrows`, `make_grouped_bar`, `make_stacked_bar`, `make_clustered_bars` |
+| `lines` | `make_trend`, `make_gradient_line`, `add_reference_line`, `mark_events`, `make_scatter` |
+| `heatmap` | `make_heatmap`, `make_column_heatmap` |
+| `radar` | `make_radar` |
+| `illustration` | `make_sphere_illustration`, `draw_geodesic`, `arrow3d`, `clean_3d_axes`, `draw_3d_frame`, `text_box` |
+| `layout` | `create_subplots`, `legend_panel`, `patch_handles`, `line_handles`, `style_axis`, `tight_ylim` |
+| `io` | `finalize_figure` |
+
+`examples/` contains ports of the original scripts (`cd examples && uv run python radar.py`); `uv run pytest` runs the tests.
+Fonts fall back from Helvetica to Arial / DejaVu Sans, and `use_tex=True` falls back to mathtext when LaTeX is missing.
+
 ## LLM skill integration
 I want to show appreciation to my friend [Shan Chen](https://shanchen.dev/) who suggested doing this.
 

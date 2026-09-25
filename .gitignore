@@ -13,3 +13,8 @@
 **/*.npz
 **/*.csv
 **/*.html
+
+# Library
+.venv/
+.pytest_cache/
+examples/figures/

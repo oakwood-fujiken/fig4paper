@@ -1,6 +1,10 @@
 # API Reference
 
-This document specifies the conventions, constants, and function signatures that implementations should follow for publication-style figures. Implement these in your own code or adapt from the [figure_* demos](demos.md).
+This document specifies the conventions, constants, and function signatures that implementations should follow for publication-style figures. They are implemented in the `figures4papers` Python package (`src/figures4papers/`, install with `uv add <path-to-repo>` or `pip install -e <path-to-repo>`); use `import figures4papers as fp` instead of re-implementing them. Runnable ports of the [figure_* demos](demos.md) live in `examples/`.
+
+## Beyond the core API
+
+The package also provides: `metric_panels` (one bar panel per metric + legend panel), `make_bars` (per-method bars, mean±std from `(n_methods, n_runs)` input), `add_delta_arrows` (ablation drops), `make_stacked_bar`, `make_clustered_bars`, `legend_panel` / `patch_handles` / `line_handles`, `style_axis`, `make_gradient_line`, `add_reference_line`, `mark_events`, `make_column_heatmap`, `make_radar`, `draw_geodesic`, `arrow3d`, `clean_3d_axes`, palette helpers (`is_dark`, `alpha_ramp`, `ours_vs_baselines`) and style presets `"bar"`, `"compact"`, `"concept"`.
 
 ---
 
